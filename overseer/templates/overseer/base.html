@@ -16,15 +16,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="{{ OVERSEER_MEDIA_PREFIX }}/favicon.png">
   <link rel="apple-touch-icon" href="{{ OVERSEER_MEDIA_PREFIX }}/apple-touch-icon.png">
-  <link rel="stylesheet" href="{{ OVERSEER_MEDIA_PREFIX }}/css/base.css">
+  <link rel="stylesheet" href="{{ OVERSEER_MEDIA_PREFIX }}/css/custom-base.css">
+
+  <!-- Loading Bootstrap -->
+  <link href="{{ OVERSEER_MEDIA_PREFIX }}/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Loading Flat UI -->
+  <link href="{{ OVERSEER_MEDIA_PREFIX }}/css/flat-ui.css" rel="stylesheet">
+
+  <!-- Load FlatUI JS -->
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/jquery-1.8.3.min.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/jquery.ui.touch-punch.min.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/bootstrap.min.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/bootstrap-select.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/bootstrap-switch.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/flatui-checkbox.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/flatui-radio.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/jquery.tagsinput.js"></script>
+  <script src="{{ OVERSEER_MEDIA_PREFIX }}/js/jquery.placeholder.js"></script>
 </head>
 
 <body>
 
-  <div id="container">
+  <div id="container" class="container">
     <header>
-        <div class="wrapper">
-            <h1><a href="{% url overseer:index %}">{{ OVERSEER_NAME }}</a></h1>
+        <div class="wrapper demo-headline">
+            <h1>{{ OVERSEER_NAME }}</h1>
         </div>
     </header>
     
@@ -39,11 +57,11 @@
         </div>
     </div>
     
-    <footer>
+<!--     <footer>
         <div class="wrapper">
             Powered by <a href="https://github.com/disqus/overseer">Overseer {{ OVERSEER_VERSION }}</a> | Conjured up by the <a href="http://code.disqus.com">DISQUS</a> team and other noble <a href="https://github.com/disqus/overseer/contributors">sorcerers</a>. | <a href="{% url admin:index %}">Admin</a>
         </div>
-    </footer>
+    </footer> -->
   </div> <!-- end of #container -->  
 </body>
 </html>
