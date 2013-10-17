@@ -19,29 +19,11 @@
                     </div>
                     <div id="collapse-{{service.id}}" class="panel-collapse collapse">
                       <div class="panel-body">
-                        {{ service.description }}
+                        {{ service.description }} <a href="{% url overseer:service service.slug %}">Details.</a>
                       </div>
                     </div>
                   </div>
                 </div>
-
-
-                    <!-- <tr>
-                        <td class="status status-{{ service.status }}">{{ service.get_status_display }}</td>
-                        <td class="service">
-                            <h2><a href="{% url overseer:service service.slug %}" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">{{ service.name }}</a></h2>
-                            {% if service.description %}
-                                <p id="collapseOne" class="panel-collapse collapse in">{{ service.description }}</p>
-                            {% endif %}
-                        </td>
-                        <td class="last-event">
-                            {% if service.date_updated != service.date_created %}
-                                <a href="{% url overseer:last_event service.slug %}">{{ service.date_updated|timesince }}</a>
-                            {% else %}
-                                <em>n/a</em>
-                            {% endif %}
-                        </td>
-                    </tr> -->
                 {% endfor %}
             </tbody>
         </table>
@@ -51,17 +33,11 @@
         <div class="event-list">
             <h3>Recent Incidents</h3>
                 <dl class="incidents">
-                    <dt>{{latest_event.get_message}}</dt>
+                    <dt><span class="status sm status-{{ latest_event.status }}"></span><span class="message"><a href="{% url overseer:event latest_event.id %}">{{latest_event.get_message}}</a></span></dt>
                     <dd><span class="services">{% for slug, name in latest_event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ latest_event.date_updated|date }} | {{ latest_event.date_updated|time }}</span></dd>
                 {% for event in event_list %}
-                        <dt>{{ event.get_message }}</dt>
+                        <dt><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url overseer:event event.id %}">{{ event.get_message }}</a></span></dt>
                         <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
-
-                    <!-- <li class="event status-{{ event.status }}">
-                        <p><a href="{% url overseer:event event.pk %}">{{ event.get_message }}</a></p>
-                        <time>{{ event.date_updated|timesince }}{% if not event.status %} (lasted {{ event.get_duration|duration }}){% endif %}</time>
-                        <span class="affects">affects {% for slug, name in event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span>
-                    </li> -->
                 {% endfor %}
             </dl>
         </div>

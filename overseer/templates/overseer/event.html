@@ -3,23 +3,16 @@
 {% load overseer_helpers %}
 
 {% block content %}
-    <h3>Event Details</h3>
+    <dl class="incidents">
+        <dt><span class="status sm status-{{ event.status }}"></span>{{ event.get_message }}</dt>
+        <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+    </dl>
 
-    <div class="latest-event event status-{{ event.status }}">
-        <p>{{ event.get_message }}</p>
-        <time>{{ event.date_updated|timesince }}{% if not event.status %} (lasted {{ event.get_duration|duration }}){% endif %}</time>
-        <span class="affects">affects {% for slug, name in event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span>
-    </div>
-
-    <div class="update-list">
-        <h3>Updates (newest first)</h3>
-        <ul>
+    <div>
+        <dl class="incidents updates">
             {% for update in update_list %}
-                <li class="update status-{{ update.status }}">
-                    <p>{{ update.get_message }}</p>
-                    <time>{{ update.date_created|timesince }}</time>
-                </li>
+                <dt><span class="message">{{ update.get_message }}</span><span class="time">{{ update.date_created|date }} | {{ update.date_created|time }}</span></dt>
             {% endfor %}
-        </ul>
+        </dl>
     </div>
 {% endblock %}

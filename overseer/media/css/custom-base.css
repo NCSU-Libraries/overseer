@@ -5,6 +5,10 @@ span.status {
     vertical-align: middle;
     height: 32px;
 }
+span.status.sm{
+    width: 16px;
+    height: 16px;
+}
 span.status.status-0 {
     background-image: url('../images/StatusIcon_lg_green.png');
 }
@@ -14,10 +18,22 @@ span.status.status-1 {
 span.status.status-2 {
     background-image: url('../images/StatusIcon_lg_red.png');
 }
+span.status.status-0.sm {
+    background-image: url('../images/StatusIcon_sm_green.png');
+}
+span.status.status-1.sm {
+    background-image: url('../images/StatusIcon_sm_yellow.png');
+}
+span.status.status-2.sm {
+    background-image: url('../images/StatusIcon_sm_red.png');
+}
 span.service-title {
     color: #FFFFFF;
     line-height: 32px;
     padding-left: 10px;
+}
+div.headline > h1 > a {
+    color: inherit;
 }
 div.event-list {
     width: 50%;
@@ -30,13 +46,22 @@ div.event-list {
 .incidents > dd {
     background-color: #ecf0f1;
     padding: 4px;
+    border-bottom: 3px solid #FFFFFF;
 }
-.incidents dd > span.services {
-    width: 50%;
-    display: inline-block;
-}
-.incidents dd > span.time {
-    width: 50%;
+.incidents dd > span.time, .incidents dt > span.time {
     text-align: right;
+}
+.incidents.updates span.message, 
+.incidents dd > span.services, 
+.incidents dd > span.time, 
+.incidents dt > span.time {
+    width: 50%;
     display: inline-block;
+}
+.incidents span.message > a {
+    color: inherit;
+}
+.incidents.updates > dt {
+    background-color: transparent;
+    border-bottom: 2px solid #ecf0f1;
 }
