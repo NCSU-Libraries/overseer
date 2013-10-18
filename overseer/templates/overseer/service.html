@@ -30,7 +30,7 @@
                 {% endif %}
                 {% if event_list %}
                   {% for event in event_list %}
-                    <dt><span class="status sm status-{{ event.status }}"></span>{{ event.get_message }}</dt>
+                    <dt><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.get_message }}</a></span></dt>
                     <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
                   {% endfor %}
                 {% endif %}
