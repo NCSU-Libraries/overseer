@@ -18,4 +18,6 @@ def default(request):
         'OVERSEER_NAME': conf.NAME,
         'OVERSEER_VERSION': overseer.VERSION,
         'OVERSEER_ALLOW_SUBSCRIPTIONS': conf.ALLOW_SUBSCRIPTIONS,
+        'HOMEPAGE_RELOAD': conf.HOMEPAGE_RELOAD,
+        'HOMEPAGE_RELOAD_DELAY_MS': conf.HOMEPAGE_RELOAD_DELAY_MS,
     }

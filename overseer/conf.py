@@ -12,6 +12,8 @@ base = getattr(settings, 'OVERSEER_CONFIG', {})
 
 TITLE = base.get('TITLE', 'Service Status')
 NAME = base.get('NAME', 'Service Status')
+HOMEPAGE_RELOAD = base.get('HOMEPAGE_RELOAD', False)
+HOMEPAGE_RELOAD_DELAY_MS = base.get('HOMEPAGE_RELOAD_DELAY_MS', 3000)
 
 TWITTER_CONSUMER_KEY = base.get('TWITTER_CONSUMER_KEY')
 TWITTER_CONSUMER_SECRET = base.get('TWITTER_CONSUMER_SECRET')
