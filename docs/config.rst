@@ -9,9 +9,6 @@ Several configuration variables are available within Overseer. All of these are 
       
       # the heading text for your page
       'NAME': 'status.disqus.com',
-
-      # the prefix for overseer's media -- by default this is handled using Django's static media server (pre-1.3)
-      'MEDIA_PREFIX': '/media/',
       
       # the base url to overseer -- highly recommended
       'BASE_URL' : 'http://status.disqus.com',
