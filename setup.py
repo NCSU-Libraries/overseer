@@ -17,15 +17,15 @@ class mytest(test):
 
 setup(
     name='Overseer',
-    version='0.2.2',
+    version='0.3',
     author='DISQUS',
     author_email='opensource@disqus.com',
-    url='http://github.com/disqus/overseer',
-    description = 'A status board built with Django',
+    url='https://github.com/NCSU-Libraries/overseer',
+    description = 'A status board built with Django.  A updated and reskinned fork of the Disqus overseer app.',
     packages=find_packages(),
     zip_safe=False,
     install_requires=[
-        'Django>=1.2.4',
+        'Django==1.5.4',
         'South',
         'django-devserver',
         'oauth2>=1.5.169',
