@@ -1,0 +1,5 @@
+Django==1.5.4
+South
+django-devserver
+oauth2>=1.5.169
+uuid
