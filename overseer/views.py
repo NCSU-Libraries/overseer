@@ -15,6 +15,7 @@ from django.core.urlresolvers import reverse
 from django.db.models.query import Q
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_protect
+from django.utils import timezone
 
 from overseer import context_processors, conf
 from overseer.forms import NewSubscriptionForm, UpdateSubscriptionForm
@@ -56,7 +57,7 @@ def index(request):
     service_list = Service.objects.all()
     
     event_list = list(Event.objects\
-                             .filter(Q(status__gt=0) | Q(date_updated__gte=datetime.datetime.now()-datetime.timedelta(days=1)))\
+                             .filter(Q(status__gt=0) | Q(date_updated__gte=timezone.now()-datetime.timedelta(days=1)))\
                              .order_by('-date_created')[0:6])
     
     if event_list:

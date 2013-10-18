@@ -58,8 +58,8 @@ class Service(models.Model):
     description = models.TextField(blank=True, null=True)
     status = models.SmallIntegerField(choices=STATUS_CHOICES, editable=False, default=0)
     order = models.IntegerField(default=0)
-    date_created = models.DateTimeField(default=datetime.datetime.now, editable=False)
-    date_updated = models.DateTimeField(default=datetime.datetime.now, editable=False)
+    date_created = models.DateTimeField(auto_now_add=True, editable=False)
+    date_updated = models.DateTimeField(auto_now_add=True, editable=False)
     
     class Meta:
         ordering = ('order', 'name')
@@ -157,8 +157,8 @@ class Event(EventBase):
     peak_status = models.SmallIntegerField(choices=STATUS_CHOICES, editable=False, default=0)
     description = models.TextField(null=True, blank=True, help_text='We will auto fill the description from the first event message if not set')
     message = models.TextField(null=True, blank=True, editable=False)
-    date_created = models.DateTimeField(default=datetime.datetime.now, editable=False)
-    date_updated = models.DateTimeField(default=datetime.datetime.now, editable=False)
+    date_created = models.DateTimeField(auto_now_add=True, editable=False)
+    date_updated = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __unicode__(self):
         return u"%s on %s" % (self.date_created, '; '.join(self.services.values_list('name', flat=True)))
@@ -241,7 +241,7 @@ class EventUpdate(EventBase):
     event = models.ForeignKey(Event)
     status = models.SmallIntegerField(choices=STATUS_CHOICES)
     message = models.TextField(null=True, blank=True)
-    date_created = models.DateTimeField(default=datetime.datetime.now, editable=False)
+    date_created = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __unicode__(self):
         return unicode(self.date_created)
@@ -251,7 +251,7 @@ class EventUpdate(EventBase):
 
 class BaseSubscription(models.Model):
     ident = models.CharField(max_length=32, unique=True)
-    date_created = models.DateTimeField(default=datetime.datetime.now, editable=False)
+    date_created = models.DateTimeField(auto_now_add=True, editable=False)
     services = models.ManyToManyField(Service)
 
     class Meta:

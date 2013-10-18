@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE HTML>
 
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -51,12 +51,11 @@
             <div class="clearfix">
                 {% block content %}{% endblock %}
                 {% if OVERSEER_ALLOW_SUBSCRIPTIONS %}
-                    <p>Want to get notified when things change? <a href="{% url overseer:create_subscription %}">Subscribe to status updates</a>.</p>
+                    <p>Want to get notified when things change? <a href="{% url 'overseer:create_subscription' %}">Subscribe to status updates</a>.</p>
                 {% endif %}
             </div>
         </div>
     </div>
-    </footer> -->
   </div> <!-- end of #container -->  
 </body>
 </html>

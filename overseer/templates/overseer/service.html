@@ -21,15 +21,19 @@
     </div>
 </div>
     
-{% if event_list %}
         <div class="event-list">
             <h3>Recent Incidents</h3>
                 <dl class="incidents">
-                {% for event in event_list %}
-                        <dt><span class="status sm status-{{ event.status }}"></span>{{ event.get_message }}</dt>
-                        <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
-                {% endfor %}
+                {% if latest_event %}
+                    <dt><span class="status sm status-{{ latest_event.status }}"></span><span class="message"><a href="{% url 'overseer:event' latest_event.id %}">{{latest_event.get_message}}</a></span></dt>
+                    <dd><span class="services">{% for slug, name in latest_event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ latest_event.date_updated|date }} | {{ latest_event.date_updated|time }}</span></dd>
+                {% endif %}
+                {% if event_list %}
+                  {% for event in event_list %}
+                    <dt><span class="status sm status-{{ event.status }}"></span>{{ event.get_message }}</dt>
+                    <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+                  {% endfor %}
+                {% endif %}
             </dl>
         </div>
-    {% endif %}
 {% endblock %}

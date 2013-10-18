@@ -5,7 +5,7 @@
 {% block content %}
     <dl class="incidents">
         <dt><span class="status sm status-{{ event.status }}"></span>{{ event.get_message }}</dt>
-        <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url overseer:service slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+        <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
     </dl>
 
     <div>
