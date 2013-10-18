@@ -114,6 +114,11 @@ class Service(models.Model):
                          .update(status=event.status)
                 self.status = event.status
 
+            # Set the status to the highest of all event statuses for this service
+            highest_status = self.get_highest_event_status(event)
+            self.status = highest_status
+            update_qs.update(status=highest_status)
+
     def get_message(self):
         if self.status == 0:
             return 'This service is operating as expected.'
@@ -122,6 +127,10 @@ class Service(models.Model):
         elif self.status == 2:
             return 'This service may be unavailable.'
         return ''
+
+    def get_highest_event_status(self, event):
+        events = Event.objects.filter(services=self, status__gt=event.status)
+        return max(e.status for e in events) if len(events) > 0 else event.status
 
 def join_with_and(values):
     values = list(values)
