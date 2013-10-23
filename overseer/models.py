@@ -132,6 +132,9 @@ class Service(models.Model):
         events = Event.objects.filter(services=self, status__gt=event.status)
         return max(e.status for e in events) if len(events) > 0 else event.status
 
+    def get_issue_events(self):
+        return Event.objects.filter(services=self, status__gt=0)
+
 def join_with_and(values):
     values = list(values)
     if len(values) == 2:

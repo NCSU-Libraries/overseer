@@ -5,53 +5,39 @@
 {% block content %}
 
     <div class="service-list">
-        <table>
-            <tbody>
-                <div class="panel-group" id="accordion">
-                {% for service in service_list %}
-                  <div class="panel">
-                    <div class="palette palette-midnight-blue panel-heading">
-                      <h6 class="">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{service.id}}">
-                          <span class="status status-{{ service.status }}"></span><span class="service-title">{{ service.name }}</span>
-                        </a>
-                      </h6>
-                    </div>
-                    <div id="collapse-{{service.id}}" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        {{ service.description }} <a href="{% url 'overseer:service' service.slug %}">Details.</a>
-                      </div>
-                    </div>
-                  </div>
-                {% endfor %}
-                </div>
-            </tbody>
-        </table>
-    </div>
-    <div class="event-list">
-        <h3>Recent Incidents</h3>
-            <dl class="incidents">
-            {% if latest_event %}
-                <dt><span class="status sm status-{{ latest_event.status }}"></span><span class="message"><a href="{% url 'overseer:event' latest_event.id %}">{{latest_event.get_message}}</a></span></dt>
-                <dd><span class="services">{% for slug, name in latest_event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ latest_event.date_updated|date }} | {{ latest_event.date_updated|time }}</span></dd>
-            {% endif %}
-            {% if event_list %}
-                {% for event in event_list %}
-                    <dt><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.get_message }}</a></span></dt>
-                    <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
-                {% endfor %}
-            {% endif %}
-        </dl>
+      {% for service in service_list %}
+        <div class="panel">
+          <div class="palette-wet-asphalt panel-heading">
+              <a href="{% url 'overseer:service' service.slug %}" class="lead">
+                <span class="status status-{{ service.status }}"></span><span class="service-title">{{ service.name }}</span>
+              </a>
+          </div>
+          <div id="collapse-{{service.id}}" class="palette-midnight-blue">
+            <div class="panel-body">
+              <dl class="service-incidents">
+                {% if service.get_issue_events %}
+                    {% for event in service.get_issue_events %}
+                        <dd><span class="incident-event"><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.get_message }}</a></span></span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+                    {% endfor %}
+                {% endif %}
+              </dl>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
 
 
 
-
+  <script type="text/javascript">
+    $(document).ready(function() {
+      var currenttime = new Date();
+      $('#update-time').html(currenttime.getHours() + ":" + currenttime.getMinutes());
+    });
+  </script>
   {% if HOMEPAGE_RELOAD %}
   <script type="text/javascript">
-    setTimeout(function(){
-       window.location.reload(1);
-    }, {{HOMEPAGE_RELOAD_DELAY_MS}});
+    setTimeout(function(){    }, {{HOMEPAGE_RELOAD_DELAY_MS}});
   </script>
   {% else %}
   <script type="text/javascript">

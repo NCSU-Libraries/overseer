@@ -60,6 +60,8 @@ def index(request):
                              .filter(Q(status__gt=0) | Q(date_updated__gte=timezone.now()-datetime.timedelta(days=1)))\
                              .order_by('-date_created')[0:6])
     
+    all_event_list = event_list
+
     if event_list:
         latest_event, event_list = event_list[0], event_list[1:]
     else:
