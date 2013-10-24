@@ -3,41 +3,40 @@
 {% load overseer_helpers %}
 
 {% block content %}
-
-    <div class="service-list">
-      {% for service in service_list %}
-        <div class="panel">
-          <div class="palette-wet-asphalt panel-heading">
-              <a href="{% url 'overseer:service' service.slug %}" class="lead">
-                <span class="status status-{{ service.status }}"></span><span class="service-title">{{ service.name }}</span>
-              </a>
-          </div>
-          <div id="collapse-{{service.id}}" class="palette-midnight-blue">
-            <div class="panel-body">
-              <dl class="service-incidents">
-                {% if service.get_issue_events %}
-                    {% for event in service.get_issue_events %}
-                        <dd><span class="incident-event"><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.get_message }}</a></span></span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
-                    {% endfor %}
-                {% endif %}
-              </dl>
-            </div>
+  
+  <h6 class="text-center">refreshed at <span id="update-time"></span></h6>
+  <div class="service-list">
+    {% for service in service_list %}
+        <div class="palette-wet-asphalt panel-heading {% if not service.get_issue_events %}not-has-panel-body{% endif %}">
+            <a href="{% url 'overseer:service' service.slug %}" class="lead">
+              <span class="status status-{{ service.status }}"></span><span class="service-title">{{ service.name }}</span>
+            </a>
+        </div>
+        {% if service.get_issue_events %}
+        <div id="collapse-{{service.id}}" class="palette-midnight-blue">
+          <div class="panel-body">
+            <dl class="service-incidents">
+                  {% for event in service.get_issue_events %}
+                      <dd><span class="incident-event"><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.description }}</a></span></span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+                  {% endfor %}
+            </dl>
           </div>
         </div>
-      {% endfor %}
-    </div>
-
-
+        {% endif %}
+    {% endfor %}
+  </div>
 
   <script type="text/javascript">
     $(document).ready(function() {
       var currenttime = new Date();
-      $('#update-time').html(currenttime.getHours() + ":" + currenttime.getMinutes());
+      var hours = currenttime.getHours();
+      var minutes = currenttime.getMinutes();
+      $('#update-time').html((hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + minutes);
     });
   </script>
   {% if HOMEPAGE_RELOAD %}
   <script type="text/javascript">
-    setTimeout(function(){    }, {{HOMEPAGE_RELOAD_DELAY_MS}});
+    setTimeout(function(){  window.location.reload(1);  }, {{HOMEPAGE_RELOAD_DELAY_MS}});
   </script>
   {% else %}
   <script type="text/javascript">

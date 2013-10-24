@@ -82,6 +82,16 @@ div.event-list {
     width: 50%;
     color: #ffffff;
 }
+
 .service-list .panel-body {
     padding: 0px 10px;
+}
+
+#status-lib .panel-heading {
+    border-top: 1px solid #ffffff;
+}
+
+#status-lib .panel-heading.not-has-panel-body {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }

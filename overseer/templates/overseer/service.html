@@ -4,22 +4,15 @@
 
 {% block content %}
 
-<div class="panel-group" id="accordion">
-    <div class="panel">
-        <div class="palette palette-midnight-blue panel-heading">
-          <h6 class="">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{service.id}}">
+<!-- <div class="panel-group" id="accordion">
+    <div class="panel"> -->
+        <div class="palette-wet-asphalt panel-heading not-has-panel-body">
+            <a class="lead">
               <span class="status status-{{ service.status }}"></span><span class="service-title">{{ service.name }}</span>
             </a>
-          </h6>
         </div>
-        <div id="collapse-{{service.id}}" class="panel-collapse collapse">
-          <div class="panel-body">
-            {{ service.description }}
-          </div>
-        </div>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
     
         <div class="event-list">
             <h3>Recent Incidents</h3>
