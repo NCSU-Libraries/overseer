@@ -4,14 +4,15 @@
 
 {% block content %}
     <dl class="incidents">
-        <dt><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.get_message }}</a></span></dt>
-        <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+        <dt><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.description }}</a></span></dt>
+        <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time:"g:i a" }}</span></dd>
     </dl>
 
     <div>
+    <h5>Event History</h5>
         <dl class="incidents updates">
             {% for update in update_list %}
-                <dt><span class="message">{{ update.get_message }}</span><span class="time">{{ update.date_created|date }} | {{ update.date_created|time }}</span></dt>
+                <dt><span class="message"><span class="status sm status-{{ update.status }}"></span>{{ update.get_message }}</span><span class="time">{{ update.date_created|date }} | {{ update.date_created|time:"g:i a" }}</span></dt>
             {% endfor %}
         </dl>
     </div>

@@ -17,7 +17,7 @@
           <div class="panel-body">
             <dl class="service-incidents">
                   {% for event in service.get_issue_events %}
-                      <dd><span class="incident-event"><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.description }}</a></span></span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+                      <dd><span class="incident-event"><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.description }}</a></span></span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time:"g:i a" }}</span></dd>
                   {% endfor %}
             </dl>
           </div>
