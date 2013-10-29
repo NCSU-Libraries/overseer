@@ -3,3 +3,4 @@ South
 django-devserver
 oauth2>=1.5.169
 uuid
+git+git://github.com/clintecker/django-google-analytics.git#egg=google_analytics
