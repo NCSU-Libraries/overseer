@@ -4,29 +4,22 @@
 
 {% block content %}
 
-<!-- <div class="panel-group" id="accordion">
-    <div class="panel"> -->
-        <div class="palette-wet-asphalt panel-heading not-has-panel-body">
-            <a class="lead">
+  <div class="service-list">
+        <div class="palette-wet-asphalt panel-heading {% if not service.get_issue_events %}not-has-panel-body{% endif %}">
+            <a href="{% url 'overseer:service' service.slug %}" class="lead">
               <span class="status status-{{ service.status }}"></span><span class="service-title">{{ service.name }}</span>
             </a>
         </div>
-    <!-- </div>
-</div> -->
-    
-        <div class="event-list">
-            <h3>Recent Incidents</h3>
-                <dl class="incidents">
-                {% if latest_event %}
-                    <!-- <dt><span class="status sm status-{{ latest_event.status }}"></span><span class="message"><a href="{% url 'overseer:event' latest_event.id %}">{{latest_event.get_message}}</a></span></dt>
-                    <dd><span class="services">{% for slug, name in latest_event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ latest_event.date_updated|date }} | {{ latest_event.date_updated|time }}</span></dd> -->
-                {% endif %}
-                {% if event_list %}
-                  {% for event in event_list %}
-                    <dt><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.get_message }}</a></span></dt>
-                    <dd><span class="services">{% for slug, name in event.get_services %}<a href="{% url 'overseer:service' slug %}">{{ name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
+        {% if service.get_issue_events %}
+        <div id="collapse-{{service.id}}" class="palette-midnight-blue">
+          <div class="panel-body">
+            <dl class="service-incidents">
+                  {% for event in service.get_issue_events %}
+                      <dd><span class="incident-event"><span class="status sm status-{{ event.status }}"></span><span class="message"><a href="{% url 'overseer:event' event.id %}">{{ event.description }}</a></span></span><span class="time">{{ event.date_updated|date }} | {{ event.date_updated|time }}</span></dd>
                   {% endfor %}
-                {% endif %}
             </dl>
+          </div>
         </div>
+        {% endif %}
+  </div>
 {% endblock %}
