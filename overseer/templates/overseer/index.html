@@ -4,7 +4,7 @@
 
 {% block content %}
   
-  <h6 class="text-center">refreshed at <span id="update-time"></span></h6>
+  <h6 class="text-center">refreshed at <span id="update-time"></span> on <span id="update-date"></span></h6>
   <div class="service-list">
     {% for service in service_list %}
         <div class="palette-wet-asphalt panel-heading {% if not service.get_issue_events %}not-has-panel-body{% endif %}">
@@ -28,19 +28,9 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#update-time').html(formatAMPM(new Date()));
+      $('#update-time').html(new moment().format("h:mm a"));
+      $('#update-date').html(new moment().format("MMM D, YYYY"));
     });
-    /*http://stackoverflow.com/questions/8888491/how-do-you-display-javascript-datetime-in-12-hour-am-pm-format*/
-    function formatAMPM(date) {
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var ampm = hours >= 12 ? 'pm' : 'am';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      minutes = minutes < 10 ? '0'+minutes : minutes;
-      var strTime = hours + ':' + minutes + ' ' + ampm;
-      return strTime;
-    }
   </script>
 
   {% if HOMEPAGE_RELOAD %}
