@@ -4,7 +4,7 @@
 
 {% block content %}
   
-  <h6 class="text-center">refreshed at <span id="update-time"></span> on <span id="update-date"></span></h6>
+  <h6 class="text-center">current as of <span id="update-time"></span> on <span id="update-date"></span></h6>
   <div class="service-list">
     {% for service in service_list %}
         <div class="palette-wet-asphalt panel-heading {% if not service.get_issue_events %}not-has-panel-body{% endif %}">
@@ -28,7 +28,7 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#update-time').html(new moment().format("h:mm a"));
+      $('#update-time').html(new moment().format("h:mm A"));
       $('#update-date').html(new moment().format("MMM D, YYYY"));
     });
   </script>
